@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SprintCreateDlg" widgetVar="SprintCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSprintTitle}">
+            <h:form id="SprintCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sprintController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSprintLabel_idSprint}" for="idSprint" />
+                        <p:inputText id="idSprint" value="#{sprintController.selected.idSprint}" title="#{bundle.CreateSprintTitle_idSprint}" required="true" requiredMessage="#{bundle.CreateSprintRequiredMessage_idSprint}"/>
+                        <p:outputLabel value="#{bundle.CreateSprintLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{sprintController.selected.nombre}" title="#{bundle.CreateSprintTitle_nombre}" required="true" requiredMessage="#{bundle.CreateSprintRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateSprintLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{sprintController.selected.fechaInicio}" title="#{bundle.EditSprintTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditSprintRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSprintLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{sprintController.selected.estado}" title="#{bundle.CreateSprintTitle_estado}" required="true" requiredMessage="#{bundle.CreateSprintRequiredMessage_estado}"/>
+                        <p:outputLabel value="#{bundle.CreateSprintLabel_usuarioAsignados}" for="usuarioAsignados" />
+                        <p:inputText id="usuarioAsignados" value="#{sprintController.selected.usuarioAsignados}" title="#{bundle.CreateSprintTitle_usuarioAsignados}" required="true" requiredMessage="#{bundle.CreateSprintRequiredMessage_usuarioAsignados}"/>
+                        <p:outputLabel value="#{bundle.CreateSprintLabel_idProduct}" for="idProduct" />
+                        <p:selectOneMenu id="idProduct" value="#{sprintController.selected.idProduct}" required="true" requiredMessage="#{bundle.EditSprintRequiredMessage_idProduct}">
+                            <f:selectItems value="#{productBlacklogController.itemsAvailableSelectOne}"
+                                           var="idProductItem"
+                                           itemValue="#{idProductItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sprintController.create}" value="#{bundle.Save}" update="display,:SprintListForm:datalist,:growl" oncomplete="handleSubmit(args,'SprintCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SprintCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

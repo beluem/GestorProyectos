@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProyectoEditDlg" widgetVar="ProyectoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProyectoTitle}">
+            <h:form id="ProyectoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proyectoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProyectoLabel_idProyecto}" for="idProyecto" />
+                        <p:inputText id="idProyecto" value="#{proyectoController.selected.idProyecto}" title="#{bundle.EditProyectoTitle_idProyecto}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_idProyecto}"/>
+                        <p:outputLabel value="#{bundle.EditProyectoLabel_nombreProyecto}" for="nombreProyecto" />
+                        <p:inputText id="nombreProyecto" value="#{proyectoController.selected.nombreProyecto}" title="#{bundle.EditProyectoTitle_nombreProyecto}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_nombreProyecto}"/>
+                        <p:outputLabel value="#{bundle.EditProyectoLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{proyectoController.selected.fechaInicio}" title="#{bundle.EditProyectoTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditProyectoLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{proyectoController.selected.fechaFin}" title="#{bundle.EditProyectoTitle_fechaFin}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditProyectoLabel_cliente}" for="cliente" />
+                        <p:inputText id="cliente" value="#{proyectoController.selected.cliente}" title="#{bundle.EditProyectoTitle_cliente}" required="true" requiredMessage="#{bundle.EditProyectoRequiredMessage_cliente}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proyectoController.update}" value="#{bundle.Save}" update="display,:ProyectoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProyectoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProyectoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -5,20 +5,30 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        <h:form>
-            <p:messages autoUpdate="true"/>
-            <h:panelGrid columns="2">
-                <p:outputLabel for="txtUsuario" value="Usuario"/>
-                <p:inputText id="txtUsuario" required="true"/>
-                
-                <p:outputLabel for="txtClave" value="Clave"/>
-                <p:inputText id="txtClave" required="true"/>
-                
-                <p:commandButton icon="ui-icon-key" value="Iniciar sesión"/>
-            </h:panelGrid>
-        </h:form>
+        <br />
+        <h:link outcome="/asignar/List" value="Show All Asignar Items"/>
+        <br />
+        <h:link outcome="/productBlacklog/List" value="Show All ProductBlacklog Items"/>
+        <br />
+        <h:link outcome="/proyecto/List" value="Show All Proyecto Items"/>
+        <br />
+        <h:link outcome="/rol/List" value="Show All Rol Items"/>
+        <br />
+        <h:link outcome="/sprint/List" value="Show All Sprint Items"/>
+        <br />
+        <h:link outcome="/userHistories/List" value="Show All UserHistories Items"/>
+        <br />
+        <h:link outcome="/usuario/List" value="Show All Usuario Items"/>
     </h:body>
+
+
+
+
+
+
+
 </html>
 

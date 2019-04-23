@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsignarEditDlg" widgetVar="AsignarEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditAsignarTitle}">
+            <h:form id="AsignarEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{asignarController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditAsignarLabel_idAsignar}" for="idAsignar" />
+                        <p:inputText id="idAsignar" value="#{asignarController.selected.idAsignar}" title="#{bundle.EditAsignarTitle_idAsignar}" required="true" requiredMessage="#{bundle.EditAsignarRequiredMessage_idAsignar}"/>
+                        <p:outputLabel value="#{bundle.EditAsignarLabel_idProyecto}" for="idProyecto" />
+                        <p:selectOneMenu id="idProyecto" value="#{asignarController.selected.idProyecto}" required="true" requiredMessage="#{bundle.EditAsignarRequiredMessage_idProyecto}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{proyectoController.itemsAvailableSelectOne}"
+                                           var="idProyectoItem"
+                                           itemValue="#{idProyectoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAsignarLabel_idRol}" for="idRol" />
+                        <p:selectOneMenu id="idRol" value="#{asignarController.selected.idRol}" required="true" requiredMessage="#{bundle.EditAsignarRequiredMessage_idRol}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="idRolItem"
+                                           itemValue="#{idRolItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAsignarLabel_idUsario}" for="idUsario" />
+                        <p:selectOneMenu id="idUsario" value="#{asignarController.selected.idUsario}" required="true" requiredMessage="#{bundle.EditAsignarRequiredMessage_idUsario}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idUsarioItem"
+                                           itemValue="#{idUsarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{asignarController.update}" value="#{bundle.Save}" update="display,:AsignarListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AsignarEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AsignarEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
